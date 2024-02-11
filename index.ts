@@ -1,41 +1,33 @@
-// Define the Book type
-type Book = {
-    id: number;
-    title: string;
-    author: string;
-    isAvailable: boolean;
-  };
-  
-  // Define the Loan type
-  type Loan = {
-    loanId: number;
-    bookId: number;
-    dueDate: Date;
-  };
-  
-  // Create a Book instance
-  const book: Book = { 
-    id: 1, 
-    title: "TypeScript Basics", 
-    author: "Jane Doe", 
-    isAvailable: true 
-  };
-  
-  // Create a Loan instance
-  const loan: Loan = { 
-    loanId: 1, 
-    bookId: book.id, 
-    dueDate: new Date("2024-03-01") 
-  };
-  
-  // Function to check the availability of a book
-  function checkAvailability(book: Book): string {
-    return book.isAvailable ? "Available" : "Currently loaned out";
-  }
-  
-  // Example usage
-  console.log(`The book "${book.title}" is ${checkAvailability(book)}.`);
-  
-  // Demonstrate type checking by attempting an incorrect assignment (uncomment to see the error)
-  // book.id = "two"; // This will cause a TypeScript compile-time error: Type 'string' is not assignable to type 'number'.
-  
+type UniqueId = number;
+
+interface Author {
+  id: UniqueId;
+  firstName: string;
+  lastName: string;
+}
+
+interface Book {
+  id: UniqueId;
+  title: string;
+  author: Author;
+  isAvailale: boolean;
+}
+
+const author01:Author = {
+  id:1,
+  firstName: "John",
+  lastName: "Wick"
+}
+
+const book01:Book = {
+  id:1,
+  title: "How to care for dogs",
+  author: author01,
+  isAvailale: true
+}
+
+const checkAvailable = (book:Book) => {
+  return book.isAvailale ? "available" : "currently out on loan";
+}
+
+console.log (`The book ${book01.title} by author ${book01.author.lastName},${book01.author.firstName[0]} is ${checkAvailable(book01)}`);
